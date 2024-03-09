@@ -11,7 +11,7 @@ const PORT = 3000;
 app.use(express_1.default.json());
 app.use("/", routes_1.default);
 app.get("/", (req, res) => {
-    res.send("Welcome to your API!");
+    res.send("Welcome to your APIs!");
 });
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

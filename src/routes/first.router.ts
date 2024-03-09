@@ -5,7 +5,7 @@ const router: Router = Router();
 router.get(
   "/name",
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
-    return res.status(200).json({ name: "Hi, I'm vishal" });
+    return res.status(200).json({ name: "Hi, I'm vishal mishra", age: 23 });
   }
 );
 
