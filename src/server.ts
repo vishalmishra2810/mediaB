@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose, { ConnectOptions } from "mongoose";
 import Router from "./routes";
+var cors = require('cors')
 
 const app = express();
 const PORT = 8080;
@@ -14,7 +15,7 @@ const mongooseOptions: any = {
   useUnifiedTopology: true,
 };
 
-// Connect to MongoDB
+// Connect to MongoDB2
 mongoose.connect(MONGODB_URI, mongooseOptions)
   .then(() => {
     console.log("MongoDB connected");
@@ -24,6 +25,7 @@ mongoose.connect(MONGODB_URI, mongooseOptions)
     process.exit(1); // Exit process with failure
   });
 
+app.use(cors())
 app.use(express.json());
 app.use("/", Router);
 

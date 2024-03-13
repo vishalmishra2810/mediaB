@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const routes_1 = __importDefault(require("./routes"));
+var cors = require('cors');
 const app = (0, express_1.default)();
 const PORT = 8080;
 // MongoDB connection URL
@@ -15,7 +16,7 @@ const mongooseOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 };
-// Connect to MongoDB
+// Connect to MongoDB2
 mongoose_1.default.connect(MONGODB_URI, mongooseOptions)
     .then(() => {
     console.log("MongoDB connected");
@@ -24,6 +25,7 @@ mongoose_1.default.connect(MONGODB_URI, mongooseOptions)
     console.error("MongoDB connection error:", err);
     process.exit(1); // Exit process with failure
 });
+app.use(cors());
 app.use(express_1.default.json());
 app.use("/", routes_1.default);
 app.get("/", (req, res) => {
