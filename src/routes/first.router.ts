@@ -1,26 +1,23 @@
-import { NextFunction, Router, Request, Response } from "express";
-import restClient from '../utils/rest.client'
+// routes/first.router.ts
 
-const router: Router = Router();
-const url = process.env.NEXT_PUBLIC_NEWSURL;
+import { Router, Request, Response, NextFunction } from "express";
 
-router.get(
-  "/name",
-  async (req: Request, res: Response, next: NextFunction): Promise<any> => {
-    return res.status(200).json({ name: "vishal mishra", age: 23 });
-  }
-);
+const router = Router();
 
-
-router.post('/v1/news', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+router.get("/name", async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   try {
-      const response = await restClient.post(`${url}/v1/news`, req.body);
-      res.json(response.data);
-  } catch (err: any) {
-      next(err);
+    return res.status(200).json({ name: "vishal mishra", age: 23 });
+  } catch (err) {
+    next(err); 
   }
 });
 
-
+router.post('/news', async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+  try {
+    return res.status(200).json({ message: 'Success' });
+  } catch (err) {
+    next(err); 
+  }
+});
 
 export default router;

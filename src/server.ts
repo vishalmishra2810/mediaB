@@ -1,7 +1,9 @@
-import express from "express";
-import mongoose, { ConnectOptions } from "mongoose";
-import Router from "./routes";
-var cors = require('cors')
+// app.ts or server.ts
+
+import express, { Request, Response } from "express";
+import mongoose from "mongoose";
+import firstRouter from "./routes/first.router";
+import cors from "cors";
 
 const app = express();
 const PORT = 8080;
@@ -15,7 +17,7 @@ const mongooseOptions: any = {
   useUnifiedTopology: true,
 };
 
-// Connect to MongoDB2
+// Connect to MongoDB
 mongoose.connect(MONGODB_URI, mongooseOptions)
   .then(() => {
     console.log("MongoDB connected");
@@ -25,14 +27,21 @@ mongoose.connect(MONGODB_URI, mongooseOptions)
     process.exit(1); // Exit process with failure
   });
 
-app.use(cors())
-app.use(express.json());
-app.use("/", Router);
+// Use CORS middleware
+app.use(cors());
 
-app.get("/", (req, res) => {
+// Parse JSON bodies
+app.use(express.json());
+
+// Define routes
+app.use("/api", firstRouter);
+
+// Default route
+app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to your APIs!");
 });
 
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
