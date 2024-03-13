@@ -1,6 +1,8 @@
 import { NextFunction, Router, Request, Response } from "express";
+import restClient from '../utils/rest.client'
 
 const router: Router = Router();
+const url = process.env.NEXT_PUBLIC_NEWSURL;
 
 router.get(
   "/name",
@@ -9,11 +11,13 @@ router.get(
   }
 );
 
-router.post('/v1/news', async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+
+router.post('/v1/news', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    return res.status(200).json(req.body);
+      const response = await restClient.post(`${url}/v1/news`, req.body);
+      res.json(response.data);
   } catch (err: any) {
-    next(err);
+      next(err);
   }
 });
 
