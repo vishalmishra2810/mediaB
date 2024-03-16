@@ -20,7 +20,7 @@ const mongooseOptions: any = {
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI, mongooseOptions)
   .then(() => {
-    console.log("MongoDB connected");
+    console.log("MongodB connected");
   })
   .catch((err) => {
     console.error("MongoDB connection error:", err);
