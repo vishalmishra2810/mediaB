@@ -20,4 +20,12 @@ router.post('/news', async (req: Request, res: Response, next: NextFunction): Pr
   }
 });
 
+router.post('/shorts', async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+  try {
+    return res.status(200).json({ message: 'Success' });
+  } catch (err) {
+    next(err); 
+  }
+});
+
 export default router;
